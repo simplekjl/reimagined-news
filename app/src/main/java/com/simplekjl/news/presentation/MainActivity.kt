@@ -1,7 +1,8 @@
-package com.simplekjl.news
+package com.simplekjl.news.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.simplekjl.news.R
 import com.simplekjl.news.presentation.news.MainFragment
 
 class MainActivity : AppCompatActivity() {
