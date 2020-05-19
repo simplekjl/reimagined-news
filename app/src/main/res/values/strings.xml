@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">News</string>
+    <string name="image_from_the_news">Image from the news</string>
+    <string name="new_from_label">From: </string>
 </resources>
