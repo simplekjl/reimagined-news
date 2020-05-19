@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.simplekjl.news.R
 import com.simplekjl.news.domain.model.Article
+import com.squareup.picasso.Picasso
 
 class ArticleViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.new_item_layout, parent, false)) {
@@ -29,6 +30,11 @@ class ArticleViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     fun setItem(article: Article) {
+        Picasso.get()
+            .load(article.urlToImage)
+            .placeholder(R.drawable.image_place_holder)
+            .error(R.drawable.image_place_holder)
+            .into(newImage)
         newTitle?.text = article.title
         newContent?.text = article.content
         newDate?.text = article.publishedAt

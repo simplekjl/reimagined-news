@@ -21,26 +21,33 @@ class MainViewModel(
     val uiStateLiveData: LiveData<UiState>
         get() = _uiStateLiveData
     private val compositeDisposable = CompositeDisposable()
+    private var totalResults = 1
+    private var currentPage = 0
 
-    fun getNews() {
-        // TODO Remove to update for repository
-        compositeDisposable.add(
-            retrieveTopNews.getTopNews(0)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.computation())
-                .subscribe(
-                    {
-                        _uiStateLiveData.value = UiState.OnSuccessNews(it)
-                        Log.d("Getting news status: ", it.status)
-                        Log.d("Getting news articles size: ", it.articles.size.toString())
-                        Log.d("Getting news total results: ", it.totalResults.toString())
-                    },
-                    {
-                        _uiStateLiveData.value = UiState.Error
-                        Log.d("Error", "something went wrong : ${it.message} ${it.stackTrace}")
-                    }
-                )
-        )
+    fun getNews(itemCount: Int) {
+        if (itemCount < totalResults) {
+            compositeDisposable.add(
+                retrieveTopNews.getTopNews(currentPage)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.computation())
+                    .subscribe(
+                        {
+                            _uiStateLiveData.value = UiState.OnSuccessNews(it)
+                            currentPage++
+                            totalResults = it.totalResults
+                            Log.d("Getting news status: ", it.status)
+                            Log.d("Getting news articles size: ", it.articles.size.toString())
+                            Log.d("Getting news total results: ", it.totalResults.toString())
+                        },
+                        {
+                            _uiStateLiveData.value = UiState.Error
+                            Log.d("Error", "something went wrong : ${it.message} ${it.stackTrace}")
+                        },
+                        { Log.d("Completed", "complete") },
+                        { _uiStateLiveData.value = UiState.Loading }
+                    )
+            )
+        }
     }
 
     fun clear() {
