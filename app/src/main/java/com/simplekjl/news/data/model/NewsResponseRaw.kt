@@ -7,22 +7,24 @@ package com.simplekjl.news.data.model
 
 data class NewsResponseRaw(
     val status: String,
+    val code: String?,
+    val message: String?,
     val totalResults: Int,
-    val articles: ArrayList<Articles>
+    val articles: ArrayList<ArticlesRaw>
 )
 
-data class Articles(
-    val source: Source,
+data class ArticlesRaw(
+    val source: SourceRaw,
     val author: String?,
     val title: String,
     val description: String,
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
-    val content: String
+    val content: String?
 )
 
-data class Source(
+data class SourceRaw(
     val id: String?,
     val name: String
 )

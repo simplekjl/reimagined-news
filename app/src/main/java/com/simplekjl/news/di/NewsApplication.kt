@@ -5,6 +5,10 @@ import com.simplekjl.news.BuildConfig
 import com.simplekjl.news.data.NewsService
 import com.simplekjl.news.data.remote.Network
 import com.simplekjl.news.data.remote.NetworkImpl
+import com.simplekjl.news.domain.NewsRepository
+import com.simplekjl.news.domain.NewsRepositoryImpl
+import com.simplekjl.news.domain.interactors.RetrieveTopNews
+import com.simplekjl.news.domain.mapper.NewsMapper
 import com.simplekjl.news.presentation.news.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -46,7 +50,10 @@ class NewsApplication : Application() {
         }
         single<NewsService> { get<Retrofit>().create(NewsService::class.java) }
         factory<Network> { NetworkImpl(get()) }
-        viewModel{ MainViewModel(get()) }
+        factory { NewsMapper() }
+        factory<NewsRepository> { NewsRepositoryImpl(get(), get()) }
+        factory { RetrieveTopNews(get()) }
+        viewModel { MainViewModel(get()) }
 
     }
 
