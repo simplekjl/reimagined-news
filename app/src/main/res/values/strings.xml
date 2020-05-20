@@ -3,4 +3,5 @@
     <string name="image_from_the_news">Image from the news</string>
     <string name="new_from_label">From: </string>
     <string name="sorry_error">Sorry, there might be some problems.</string>
+    <string name="retry_button_text">Retry</string>
 </resources>

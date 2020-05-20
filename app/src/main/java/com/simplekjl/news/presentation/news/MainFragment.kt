@@ -124,6 +124,9 @@ class MainFragment : Fragment() {
             progressBar.isVisible = false
             errorMessage.isVisible = true
             newsRv.isVisible = false
+            retryButton.setOnClickListener {
+                viewModel.getNews(newsAdapter.itemCount)
+            }
         }
     }
 
