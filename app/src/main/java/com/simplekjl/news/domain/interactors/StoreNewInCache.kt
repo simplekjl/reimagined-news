@@ -1,7 +1,7 @@
 package com.simplekjl.news.domain.interactors
 
+import com.simplekjl.news.data.local.News
 import com.simplekjl.news.domain.NewsRepository
-import com.simplekjl.news.domain.model.Article
 import io.reactivex.Completable
 
 //
@@ -10,5 +10,5 @@ import io.reactivex.Completable
 
 class StoreNewInCache(private val newsRepository: NewsRepository) {
 
-    fun storeNewInCache(article: Article): Completable = newsRepository.saveNew(article)
+    fun storeNewInCache(news: News): Completable = newsRepository.saveNewsRaw(news)
 }

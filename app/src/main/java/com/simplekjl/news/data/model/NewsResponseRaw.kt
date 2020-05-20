@@ -4,7 +4,6 @@ package com.simplekjl.news.data.model
 // Created by simplekjl on 5/19/20.
 // Copyright (c) 2020 simplekjl . All rights reserved.
 //
-
 data class NewsResponseRaw(
     val status: String,
     val code: String?,
@@ -16,8 +15,8 @@ data class NewsResponseRaw(
 data class ArticlesRaw(
     val source: SourceRaw,
     val author: String?,
-    val title: String,
-    val description: String,
+    val title: String?,
+    val description: String?,
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
@@ -26,5 +25,5 @@ data class ArticlesRaw(
 
 data class SourceRaw(
     val id: String?,
-    val name: String
+    val name: String?
 )

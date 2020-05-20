@@ -8,6 +8,5 @@ import io.reactivex.Completable
 //
 
 class ClearCachedNews(private val repository: NewsRepository) {
-
     fun clearCachedNews(): Completable = repository.clearNews()
 }

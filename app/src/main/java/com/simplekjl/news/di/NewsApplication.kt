@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.simplekjl.news.BuildConfig
 import com.simplekjl.news.data.NewsService
 import com.simplekjl.news.data.local.NewsAppDatabase
+import com.simplekjl.news.data.local.NewsDao
 import com.simplekjl.news.data.remote.Network
 import com.simplekjl.news.data.remote.NetworkImpl
 import com.simplekjl.news.domain.NewsRepository
@@ -50,17 +51,17 @@ class NewsApplication : Application() {
                 .baseUrl(BuildConfig.BASE_URL)
                 .build()
         }
-        single {
+        single<NewsAppDatabase> {
             Room.databaseBuilder(
                 applicationContext,
-                NewsAppDatabase::class.java, "newsdb"
+                NewsAppDatabase::class.java, "news-db"
             ).build()
         }
-        single { get<NewsAppDatabase>().newsDao() }
+        single<NewsDao> { get<NewsAppDatabase>().newsDao() }
         single<NewsService> { get<Retrofit>().create(NewsService::class.java) }
         factory<Network> { NetworkImpl(get()) }
         factory { NewsMapper() }
-        factory<NewsRepository> { NewsRepositoryImpl(get(), get()) }
+        factory<NewsRepository> { NewsRepositoryImpl(get(), get(),get()) }
         factory { RetrieveTopNews(get()) }
         viewModel { MainViewModel(get()) }
 

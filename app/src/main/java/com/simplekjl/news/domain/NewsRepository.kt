@@ -1,6 +1,6 @@
 package com.simplekjl.news.domain
 
-import com.simplekjl.news.domain.model.Article
+import com.simplekjl.news.data.local.News
 import com.simplekjl.news.domain.model.NewsEntity
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -10,6 +10,6 @@ import io.reactivex.Observable
 //
 interface NewsRepository {
     fun clearNews(): Completable
-    fun saveNew(article: Article): Completable
+    fun saveNewsRaw(article: News): Completable
     fun getTopNews(page: Int): Observable<NewsEntity>
 }
