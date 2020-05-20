@@ -6,10 +6,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//
-// Created by  on 5/19/20.
-//
-
 interface NewsService {
     // values fixed at the moment, future development can allow to set place and other parameters
     @GET("top-headlines")
